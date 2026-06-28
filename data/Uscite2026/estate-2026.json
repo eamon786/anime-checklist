@@ -119,7 +119,7 @@
   {
     "title": "THE GHOST IN THE SHELL",
     "date": "07/07",
-    "platform": "CR",
+    "platform": "AP",
     "dub": "si",
     "genres": "Action, Mystery, Sci-Fi, Suspense, Psychological, Seinen",
     "kvdate": "2026-07-07",
@@ -348,6 +348,15 @@
     "dub": "no",
     "genres": "Romance, Crossdressing, School, Shoujo",
     "kvdate": "2026-07-01",
+    "notes": ""
+  },
+    {
+    "title": "From Old Country Bumpkin to Master Swordsman S2",
+    "date": "08/07",
+    "platform": "AP",
+    "dub": "si",
+    "genres": "Romance, Crossdressing, School, Shoujo",
+    "kvdate": "2026-07-08",
     "notes": ""
   }
 ]
