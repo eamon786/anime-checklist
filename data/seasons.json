@@ -1,0 +1,22 @@
+[
+  {
+    "id": "estate-2026",
+    "title": "Estate 2026",
+    "file": "Uscite2026/estate-2026.json"
+  },
+  {
+    "id": "primavera-2026",
+    "title": "Primavera 2026",
+    "file": "primavera-2026.json"
+  },
+  {
+    "id": "inverno-2026",
+    "title": "Inverno 2026",
+    "file": "inverno-2026.json"
+  },
+  {
+    "id": "autunno-2025",
+    "title": "Autunno 2025",
+    "file": "autunno-2025.json"
+  }
+]
