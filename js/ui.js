@@ -15,12 +15,12 @@ const UI = {
   },
 
   platformClass(platform) {
-    const map = { 'CR': 'platform-CR', 'NF': 'platform-NF', 'D+': 'platform-DP', 'AP': 'platform-AP' };
+    const map = { 'CR': 'platform-CR', 'NF': 'platform-NF', 'D+': 'platform-DP', 'AP': 'platform-AP', 'AG': 'platform-AG'  };
     return map[platform] || 'platform-CR';
   },
 
   platformLabel(platform) {
-    const map = { 'CR': 'Crunchyroll', 'NF': 'Netflix', 'D+': 'Disney+', 'AP': 'Amazon Prime' };
+    const map = { 'CR': 'Crunchyroll', 'NF': 'Netflix', 'D+': 'Disney+', 'AP': 'Amazon Prime', 'AG': 'Anime Generation' };
     return map[platform] || platform;
   },
 
