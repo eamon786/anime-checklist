@@ -42,6 +42,8 @@
   --color-dp-bg: rgba(0,110,153,0.12);
   --color-ap:   #00a8e1;
   --color-ap-bg: rgba(0,168,225,0.12);
+  --color-ag:   #d1243a;
+  --color-ag-bg: rgba(209,36,58,0.12);
 
   --radius-sm:  0.3rem;
   --radius-md:  0.5rem;
@@ -592,6 +594,7 @@ select.season-select:focus, select.sort-select:focus { border-color: var(--color
 .badge.platform-NF  { background: var(--color-nf-bg);  color: var(--color-nf);  border-color: rgba(229,9,20,.25); }
 .badge.platform-DP  { background: var(--color-dp-bg);  color: var(--color-dp);  border-color: rgba(0,110,153,.25); }
 .badge.platform-AP  { background: var(--color-ap-bg);  color: var(--color-ap);  border-color: rgba(0,168,225,.25); }
+.badge.platform-AG  { background: var(--color-ag-bg);  color: var(--color-ag);  border-color: rgba(209,36,58,.25); }
 .badge.dub {
   background: rgba(90,168,50,0.12);
   color: var(--color-success);

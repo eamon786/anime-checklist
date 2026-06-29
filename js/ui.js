@@ -109,7 +109,7 @@ const UI = {
           <div class="anime-title">${this.escHtml(item.title)}</div>
           <div class="anime-meta">
             <span class="badge date">📅 ${item.date}</span>
-            <span class="badge platform-${item.platform}">${item.platform === 'D+' ? 'Disney+' : item.platform === 'CR' ? 'Crunchyroll' : item.platform === 'NF' ? 'Netflix' : 'Amazon'}</span>
+            <span class="badge platform-${item.platform}">${this.platformLabel(item.platform)}</span>
             ${item.dub === 'si' ? '<span class="badge dub">🇮🇹 DUB ITA</span>' : ''}
           </div>
           <div class="anime-meta" style="margin-top:var(--space-1)">
@@ -178,6 +178,7 @@ const UI = {
     const nfCount   = list.filter(a => a.platform === 'NF').length;
     const dpCount   = list.filter(a => a.platform === 'D+').length;
     const apCount   = list.filter(a => a.platform === 'AP').length;
+    const agCount   = list.filter(a => a.platform === 'AG').length;
 
     const anim = (id, val) => {
       const el = document.getElementById(id);
@@ -191,6 +192,7 @@ const UI = {
     anim('statNF', nfCount);
     anim('statDP', dpCount);
     anim('statAP', apCount);
+    anim('statAG', agCount);
 
     // Percentage with % sign
     const pctEl = document.getElementById('statPct');
