@@ -1,211 +1,233 @@
 <!DOCTYPE html>
 <html lang="it" data-theme="dark">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Checklist interattiva per le uscite anime stagionali 2026. Filtra per piattaforma, stato e doppiaggio italiano.">
+  <meta name="description"
+    content="Checklist interattiva per le uscite anime stagionali 2026. Filtra per piattaforma, stato e doppiaggio italiano.">
   <title>Anime Checklist</title>
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700,800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-<div class="app">
+  <div class="app">
 
-  <!-- ── HEADER ── -->
-  <header class="header">
-    <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-    <div class="logo">
-      <div class="logo-mark">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
-        </svg>
-      </div>
-      <div>
-        <div class="logo-title">Anime Checklist</div>
-        <div class="logo-sub">Checklist post · GitHub</div>
-      </div>
-    </div>
-
-    <div class="header-controls">
-      <div class="season-select-wrap">
-        <label for="seasonSelect">Stagione:</label>
-        <select class="season-select" id="seasonSelect" aria-label="Seleziona stagione"></select>
-      </div>
-      <button class="btn" id="exportBtn" title="Esporta JSON corrente">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Esporta
+    <!-- ── HEADER ── -->
+    <header class="header">
+      <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+        <span></span><span></span><span></span>
       </button>
-      <button class="btn primary" id="importBtn" title="Importa file JSON">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-        Importa JSON
-      </button>
-      <input type="file" id="importFile" accept="application/json" hidden>
-    </div>
-  </header>
-
-  <!-- ── SIDEBAR ── -->
-  <aside class="sidebar">
-
-    <!-- Search -->
-    <div class="sidebar-section">
-      <div class="sidebar-section-title">Ricerca</div>
-      <div class="search-wrap">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input class="input" type="search" id="searchInput" placeholder="Cerca titolo, generi..." autocomplete="off">
-      </div>
-    </div>
-
-    <!-- Platform filter -->
-    <div class="sidebar-section">
-      <div class="sidebar-section-title">Piattaforma</div>
-      <div class="filter-chips">
-        <button class="chip active" data-filter="platform" data-value="all">Tutte</button>
-        <button class="chip" data-filter="platform" data-value="CR">CR</button>
-        <button class="chip" data-filter="platform" data-value="NF">NF</button>
-        <button class="chip" data-filter="platform" data-value="D+">D+</button>
-        <button class="chip" data-filter="platform" data-value="AP">AP</button>
-        <button class="chip" data-filter="platform" data-value="AG">AG</button>
-
-      </div>
-    </div>
-
-    <!-- Status filter -->
-    <div class="sidebar-section">
-      <div class="sidebar-section-title">Stato</div>
-      <div class="filter-chips">
-        <button class="chip active" data-filter="status" data-value="all">Tutti</button>
-        <button class="chip" data-filter="status" data-value="remaining">Da vedere</button>
-        <button class="chip" data-filter="status" data-value="completed">Completati</button>
-      </div>
-    </div>
-
-    <!-- Dub filter -->
-    <div class="sidebar-section">
-      <div class="sidebar-section-title">Doppiaggio</div>
-      <div class="filter-chips">
-        <button class="chip" data-filter="dub" data-value="off">🇮🇹 Solo Dub ITA</button>
-      </div>
-    </div>
-
-    <!-- Drag & drop fallback -->
-    <div class="sidebar-section">
-      <div class="sidebar-section-title">Import manuale</div>
-      <div class="upload-area" id="dropZone" role="button" tabindex="0" aria-label="Importa JSON drag and drop">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-          <polyline points="17 8 12 3 7 8"/>
-          <line x1="12" y1="3" x2="12" y2="15"/>
-        </svg>
-        <p>Trascina un <strong>.json</strong> qui<br>o clicca per selezionarlo</p>
-      </div>
-    </div>
-
-    <!-- Stats summary in sidebar -->
-    <div class="sidebar-section" style="margin-top:auto">
-      <div class="sidebar-section-title">Avanzamento</div>
-      <div class="progress-bar-wrap">
-        <div class="progress-info">
-          <span class="label">Completamento</span>
-          <span class="pct" id="pctLabel">0%</span>
+      <div class="logo">
+        <div class="logo-mark">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="23 7 16 12 23 17 23 7" />
+            <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
+          </svg>
         </div>
-        <div class="progress-track">
-          <div class="progress-fill" id="progressFill"></div>
+        <div>
+          <div class="logo-title">Anime Checklist</div>
+          <div class="logo-sub">Checklist post · GitHub</div>
         </div>
       </div>
-    </div>
 
-  </aside>
-  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+      <div class="header-controls">
+        <div class="season-select-wrap">
+          <label for="seasonSelect">Stagione:</label>
+          <select class="season-select" id="seasonSelect" aria-label="Seleziona stagione"></select>
+        </div>
+        <button class="btn" id="exportBtn" title="Esporta JSON corrente">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+          Esporta
+        </button>
+        <button class="btn primary" id="importBtn" title="Importa file JSON">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="17 8 12 3 7 8" />
+            <line x1="12" y1="3" x2="12" y2="15" />
+          </svg>
+          Importa JSON
+        </button>
+        <input type="file" id="importFile" accept="application/json" hidden>
+      </div>
+    </header>
 
-  <!-- ── MAIN ── -->
-  <main class="main">
+    <!-- ── SIDEBAR ── -->
+    <aside class="sidebar">
 
-    <!-- Stats grid -->
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-label">Totale anime</div>
-        <div class="stat-value" id="statTotal">0</div>
+      <!-- Search -->
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Ricerca</div>
+        <div class="search-wrap">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round">
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+          <input class="input" type="search" id="searchInput" placeholder="Cerca titolo, generi..." autocomplete="off">
+        </div>
       </div>
-      <div class="stat-card">
-        <div class="stat-label">Completati</div>
-        <div class="stat-value success" id="statDone">0</div>
+
+      <!-- Platform filter -->
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Piattaforma</div>
+        <div class="filter-chips">
+          <button class="chip active" data-filter="platform" data-value="all">Tutte</button>
+          <button class="chip" data-filter="platform" data-value="CR">CR</button>
+          <button class="chip" data-filter="platform" data-value="NF">NF</button>
+          <button class="chip" data-filter="platform" data-value="D+">D+</button>
+          <button class="chip" data-filter="platform" data-value="AP">AP</button>
+          <button class="chip" data-filter="platform" data-value="AG">AG</button>
+
+        </div>
       </div>
-      <div class="stat-card">
-        <div class="stat-label">Restanti</div>
-        <div class="stat-value" id="statRemaining">0</div>
+
+      <!-- Status filter -->
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Stato</div>
+        <div class="filter-chips">
+          <button class="chip active" data-filter="status" data-value="all">Tutti</button>
+          <button class="chip" data-filter="status" data-value="remaining">Da vedere</button>
+          <button class="chip" data-filter="status" data-value="completed">Completati</button>
+        </div>
       </div>
-      <div class="stat-card">
-        <div class="stat-label">Percentuale</div>
-        <div class="stat-value primary" id="statPct">0%</div>
+
+      <!-- Dub filter -->
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Doppiaggio</div>
+        <div class="filter-chips">
+          <button class="chip" data-filter="dub" data-value="off">🇮🇹 Solo Dub ITA</button>
+        </div>
       </div>
-      <div class="stat-card">
-        <div class="stat-label">🇮🇹 Dub ITA</div>
-        <div class="stat-value" id="statDub">0</div>
+
+      <!-- Drag & drop fallback -->
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Import manuale</div>
+        <div class="upload-area" id="dropZone" role="button" tabindex="0" aria-label="Importa JSON drag and drop">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="17 8 12 3 7 8" />
+            <line x1="12" y1="3" x2="12" y2="15" />
+          </svg>
+          <p>Trascina un <strong>.json</strong> qui<br>o clicca per selezionarlo</p>
+        </div>
       </div>
-      <div class="stat-card">
-        <div class="stat-label">Crunchyroll</div>
-        <div class="stat-value" style="color:var(--color-cr)" id="statCR">0</div>
+
+      <!-- Stats summary in sidebar -->
+      <div class="sidebar-section" style="margin-top:auto">
+        <div class="sidebar-section-title">Avanzamento</div>
+        <div class="progress-bar-wrap">
+          <div class="progress-info">
+            <span class="label">Completamento</span>
+            <span class="pct" id="pctLabel">0%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+        </div>
       </div>
-      <div class="stat-card">
-        <div class="stat-label">Netflix</div>
-        <div class="stat-value" style="color:var(--color-nf)" id="statNF">0</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Disney+</div>
-        <div class="stat-value" style="color:var(--color-dp)" id="statDP">0</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Amazon Prime</div>
-        <div class="stat-value" style="color:var(--color-ap)" id="statAP">0</div>
-      </div>
-    </div>
+
+    </aside>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ── MAIN ── -->
+    <main class="main">
+
+      <!-- Stats grid -->
+      <div class="stats-grid">
         <div class="stat-card">
-          <div class="stat-label">Anime Generation</div>
+          <div class="stat-label">Totale anime</div>
+          <div class="stat-value" id="statTotal">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Completati</div>
+          <div class="stat-value success" id="statDone">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Restanti</div>
+          <div class="stat-value" id="statRemaining">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Percentuale</div>
+          <div class="stat-value primary" id="statPct">0%</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">🇮🇹 Dub ITA</div>
+          <div class="stat-value" id="statDub">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Crunchyroll</div>
+          <div class="stat-value" style="color:var(--color-cr)" id="statCR">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Netflix</div>
+          <div class="stat-value" style="color:var(--color-nf)" id="statNF">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Disney+</div>
+          <div class="stat-value" style="color:var(--color-dp)" id="statDP">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Amazon Prime</div>
           <div class="stat-value" style="color:var(--color-ap)" id="statAP">0</div>
         </div>
+        <div class="stat-card">
+          <div class="stat-label">Anime Generation</div>
+          <div class="stat-value" style="color:var(--color-ap)" id="statAG">0</div>
+        </div>
       </div>
 
-  
-    <!-- Section bar -->
-    <div class="section-bar">
-      <div class="section-bar-title">
-        <h2>Lista anime</h2>
-        <span class="result-count" id="resultCount">0 di 0 anime</span>
-      </div>
-      <div class="sort-controls">
-        <label for="sortSelect">Ordina:</label>
-        <select class="sort-select" id="sortSelect">
-          <option value="default">Predefinito</option>
-          <option value="title-asc">Titolo A-Z</option>
-          <option value="title-desc">Titolo Z-A</option>
-          <option value="date-asc">Data ↑</option>
-          <option value="date-desc">Data ↓</option>
-          <option value="platform">Piattaforma</option>
-        </select>
-      </div>
-    </div>
 
-    <!-- Anime grid -->
-    <div class="anime-grid" id="animeGrid">
-      <div class="empty-state">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <polygon points="23 7 16 12 23 17 23 7"/>
-          <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
-        </svg>
-        <h3>Caricamento stagione…</h3>
-        <p>Seleziona una stagione dal menu in alto o importa un file JSON.</p>
+
+      <!-- Section bar -->
+      <div class="section-bar">
+        <div class="section-bar-title">
+          <h2>Lista anime</h2>
+          <span class="result-count" id="resultCount">0 di 0 anime</span>
+        </div>
+        <div class="sort-controls">
+          <label for="sortSelect">Ordina:</label>
+          <select class="sort-select" id="sortSelect">
+            <option value="default">Predefinito</option>
+            <option value="title-asc">Titolo A-Z</option>
+            <option value="title-desc">Titolo Z-A</option>
+            <option value="date-asc">Data ↑</option>
+            <option value="date-desc">Data ↓</option>
+            <option value="platform">Piattaforma</option>
+          </select>
+        </div>
       </div>
-    </div>
 
-  </main>
-</div>
+      <!-- Anime grid -->
+      <div class="anime-grid" id="animeGrid">
+        <div class="empty-state">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="23 7 16 12 23 17 23 7" />
+            <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
+          </svg>
+          <h3>Caricamento stagione…</h3>
+          <p>Seleziona una stagione dal menu in alto o importa un file JSON.</p>
+        </div>
+      </div>
 
-<script src="js/storage.js"></script>
-<script src="js/loader.js"></script>
-<script src="js/filters.js"></script>
-<script src="js/ui.js"></script>
-<script src="js/app.js"></script>
+    </main>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/loader.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
 </body>
+
 </html>
